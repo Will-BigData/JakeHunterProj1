@@ -93,7 +93,12 @@ def main():
                             print("\n")
                             users = get_all_users()
                             for user in users:
-                                print(user)
+                                user_id = user[0]
+                                username = user[1]
+                                role = user[3]
+                            
+                                # Formatting the output
+                                print(f"ID: {user_id}, USERNAME: {username}, ROLE: {role}")
 
                         elif action == '2':
                             orders = get_all_orders()
@@ -124,6 +129,7 @@ def main():
                             print("\nInvalid option. Please try again.")
 
                 elif action == '4':
+                    logging.info("Active user has logged out")
                     break
             
         cursor.close()
@@ -211,7 +217,7 @@ def login(username, password):
         if isinstance(hashed_password, str):
             hashed_password = hashed_password.encode('utf-8')
         
-        if verify_password(password, hashed_password): # TODO fix this
+        if verify_password(password, hashed_password): 
             logging.info(f"{username} logged in successfully.")
             return user_id
     else:
